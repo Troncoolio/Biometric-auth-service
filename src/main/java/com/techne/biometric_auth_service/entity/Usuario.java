@@ -3,7 +3,13 @@ package com.techne.biometric_auth_service.entity;
 import java.util.List;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor 
+@AllArgsConstructor 
+@ToString(exclude = {"intentosVerificacion", "docId"})
 @Entity
 public class Usuario {
     @Id 
@@ -23,11 +29,11 @@ public class Usuario {
     private String password;
 
     @OneToOne 
-    @JoinColumn(name = "documentoIdentidad")
+    @JoinColumn(name = "documento_identidad")
     private DocumentoIdentidad docId;
 
-    @OneToMany
-    private List<IntentoVerificacion> intentoVerificacion;
+    @OneToMany(mappedBy = "usuario")
+    private List<IntentoVerificacion> intentosVerificacion;
 
 
 
